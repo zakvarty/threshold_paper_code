@@ -7,6 +7,7 @@ To run this code several R packages are required. They may be installed by runni
 ```
     required_pkgs <- c(
         "dplyr",
+        "ggplot2"
         "jsonlite",
         "lubridate",
         "matrixStats",
@@ -66,6 +67,22 @@ This directory contains the code required to produce the modified QQ and PP plot
 
 QQ and PP plots are constructed on Gaussian and exponential margins based on magnitudes exceeding 3 thresholds: one below both threshold levels, one between the threshold levels and one above both. These threshold values are set on line 86 to be `thresholds_vec =  c(0.5, 1.15, 1.85)`. The plots above 1.15ML and 1.85ML are currently used in the paper. 
 
+### 05_threshold_selection simulation/  
+This directory contains the code required to run the simulation studies in Section 5 of the paper. These simulations are computationally intensive and  have been written for implementation on a remote computing cluster.
+
+The experiments are initially organised by threshold type: constant, stepped or change-point. Within these, options for hard or phased censoring are investigated for some threshold types. 
+
+For each experiment two directories exist:
+ `./directory_name/` is pushed to the computing cluster and selects thresholds for many simulated catalogues of the same structure (structure and selection method vaires between experiments). `./directory_name_pulled/` is pulled from the computing cluster. It is in this directory that the plots are constructed by running `plots.R. `
+
+_NB: In the git repo these directories will appear to be the same since data files are not version controlled. However, in the local version these are different. The empty (pushable) version is kept to make re-running the experiments easier when revisions are required._ 
+
+To be clear, the workflow when re-running each experiment is: 
+
+    1. Check that `submit.sh` has correct limits on core use and will email on completion; 
+    2. Upload the directory without '_pulled' to STORM and 'qsub submit.sh' ;
+    3. When code completed, pull the storm directory to 'directory_name_pulled';
+    4. Within the pulled directory, run 'plots.R' to create the plots to be included in the paper.
 
 ## License 
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
