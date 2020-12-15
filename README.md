@@ -33,22 +33,20 @@ This file scrapes the current Groningen catalogue as a JSON file and formats it 
 
 To download an updated catalogue, set `download_new_json = FALSE` on line 12 and amend the `JSONpath` in line 15 with the new download date and time.
 
-### `00_src/`
+### 00_src/
 This folder contains the source code for R functions that are used within the later directories. 
     
 `catalogue_creation/` functions for downloading the Groningen data. 
 
-
-
-### ```01_introduction/```
+### 01_introduction/
 There is currently no code associated with to the introduction. 
 
-### ```02_motivation_and_model/```
+### 02_motivation_and_model/
 This folder contains the code required to produce:
 
 Figures of the Groningen earthquake catalogue on natural and index time scales. These are created in ```mativating_data.R``` and stored in ```output/groningen_catalogue.pdf```.
 
-### ```03_variable_threshold_benefits``` 
+### 03_variable_threshold_benefits/ 
 This directory contains the code required for the simulation study that compares parameter and return level estimation using catalogues resulting from a conservative, stepped or extended threshold. 
 
 By running `motivating_example.R` the following will be created in `output/plots/`: 
@@ -60,7 +58,12 @@ By running `motivating_example.R` the following will be created in `output/plots
     - The estimated conditional return levels (above the conservative threshold) using each threshold.
 
 
+### 04_threshold_selection_method/
+This directory contains the code required to produce the modified QQ and PP plots used when introducing our proposed threshold selection metric. A catalogue is simulated with the same stepped  threshold and hard censoring during the simulation study of `03_variable_selection_benefits/`. 
 
+1000 GPD magnitudes exceeding 1.05ML are simulated. Hard censoring is then applied with the first 500 events have a threshold of 1.65ML which reduces to 1.05ML for the final 500 events. This leaves 582 magnitudes, which are rounded to the neared 0.1ML. 
+
+QQ and PP plots are constructed on Gaussian and exponential margins based on magnitudes exceeding 3 thresholds: one below both threshold levels, one between the threshold levels and one above both. These threshold values are set on line 86 to be `thresholds_vec =  c(0.5, 1.15, 1.85)`. The plots above 1.15ML and 1.85ML are currently used in the paper. 
 
 
 ## License 
