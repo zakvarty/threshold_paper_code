@@ -1,0 +1,15 @@
+
+## Helpful command line things for when you inevitably forget!
+
+## Remove directory on storm
+rm -r qq_stepped_threshold_selection
+
+## Send all to storm 
+storm_push qq_stepped_threshold_selection ~/Desktop/qq_stepped_threshold_selection 
+
+## Get all from storm 
+storm_pull qq_stepped_threshold_selection ~/Desktop/storm_pulls 
+
+## To run the thing 
+generaL:  qsub PATH_TO_SHELL_SCRIPT_PARENT_FOLDER/batch_submit_zv.sh 
+specific qsub qq_stepped_threshold_selection/batch_submit_zv.sh

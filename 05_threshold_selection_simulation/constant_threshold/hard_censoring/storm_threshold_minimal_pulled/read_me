@@ -1,0 +1,5 @@
+Considers 500 simulated catalouges of the same structure and the threshold selected for each of these by the expected pp and qq metric values. 
+
+To run, upload to storm and submit the shell script. Download the full folder upon completion, which will have the expected metric scores for each catalogue.
+
+ Running the plotting script will aggregate all the expected metrics scores and create a plot of the proportion of catalogues which resulted in selection of each threshold by each metric.
