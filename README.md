@@ -73,7 +73,7 @@ This directory contains the code required to run the simulation studies in Secti
 The experiments are initially organised by threshold type: constant, stepped or change-point. Within these, options for hard or phased censoring are investigated for some threshold types. 
 
 For each experiment two directories exist:
- `./directory_name/` is pushed to the computing cluster and selects thresholds for many simulated catalogues of the same structure (structure and selection method vaires between experiments). `./directory_name_pulled/` is pulled from the computing cluster. It is in this directory that the plots are constructed by running `plots.R. `
+ `./directory_name/` is pushed to the computing cluster and selects thresholds for many simulated catalogues of the same structure (structure and selection method varies between experiments). `./directory_name_pulled/` is pulled from the computing cluster. It is in this directory that the plots are constructed by running `plots.R. `
 
 _NB: In the git repo these directories will appear to be the same since data files are not version controlled. However, in the local version these are different. The empty (pushable) version is kept to make re-running the experiments easier when revisions are required._ 
 
