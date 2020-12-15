@@ -86,6 +86,15 @@ To be clear, the workflow when re-running each experiment is:
     3. When code completed, pull the storm directory to 'directory_name_pulled';
     4. Within the pulled directory, run 'plots.R' to create the plots to be included in the paper.
 
+### 06_application_to_groningen/
+This directory contains the code required to reproduce the two analysises in section 6 of the paper. The first of these considers Gronignen earthquakes of mangitude 1.45ML and greater to motivate the use of a rounded GPD model over a rounded exponential model and to validate the assumption of i.i.d. magnitudes. The second of these selects a flat and a sigmoid threshold for the Groningen catalogue and compares these in terms of data use, parameter estimation and return-level estimation. 
+
+`flat_thresholds/` contains the code required to fit above the conservative threshold and motivate the use of the Rounded GPD. It also contains the code to select a flat threshold via grid search, and then compare the models fitted using the selected and conservative thresholds.
+
+`groningen_sigmoid/` contains the code required to select a sigmoid threshold for the Groningen catalogue via Bayesian optimisation. This is done in `main.R`. The model using the selected sigmoid threshold is fitted and compared to the those using the flat thresholds in `post_selection.R`.
+
+
+
 
 ## License 
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
