@@ -75,6 +75,8 @@ The experiments are initially organised by threshold type: constant, stepped or 
 For each experiment two directories exist:
  `./directory_name/` is pushed to the computing cluster and selects thresholds for many simulated catalogues of the same structure (structure and selection method varies between experiments). `./directory_name_pulled/` is pulled from the computing cluster. It is in this directory that the plots are constructed by running `plots.R. `
 
+Currently, only the flat and change-point simulations are included in the paper.
+
 _NB: In the git repo these directories will appear to be the same since data files are not version controlled. However, in the local version these are different. The empty (pushable) version is kept to make re-running the experiments easier when revisions are required._ 
 
 To be clear, the workflow when re-running each experiment is: 
