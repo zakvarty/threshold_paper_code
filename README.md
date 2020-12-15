@@ -10,6 +10,7 @@ To run this code several R packages are required. They may be installed by runni
         "jsonlite",
         "lubridate",
         "matrixStats",
+        "purrr",
         "readr",
         "sp"
         )
