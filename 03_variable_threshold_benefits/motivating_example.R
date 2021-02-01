@@ -179,7 +179,7 @@ points(x = sig_u, y = xi, pch = "+")
 legend('topright',
        c("Conservative", "Extended", "Stepped", "True"),
        col = c("grey30", "grey70", "grey60","black"),
-       pch = list(15,15,15,43),
+       pch = list(16,16,16,43),
        cex = rep(1.2,4),
        bty = 'n')
 dev.off()
