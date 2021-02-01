@@ -133,7 +133,7 @@ plot(
    ylim = c(0,1),
    lwd = 2,
    main = paste0("d(q,1), RMSE = ", round(RMSE_dq1, 2)))
-abline(v=v , lty = 1, col = 'grey70')
+abline(v=v , lty = 2, col = 2, lwd = 2)
 plot(
    x = selection_probs$threshold,
    y = selection_probs$qq_EMSE,
@@ -143,7 +143,7 @@ plot(
    ylim = c(0,1),
    lwd = 2,
    main = paste0("d(q,2), RMSE = ", round(RMSE_dq2, 2)))
-abline(v=v , lty = 1, col = 'grey70')
+abline(v=v , lty = 2, col = 2, lwd = 2)
 plot(
    x = selection_probs$threshold,
    y = selection_probs$pp_EWMAE,
@@ -153,7 +153,7 @@ plot(
    ylim = c(0,1),
    lwd = 2,
    main = paste0("d(p,1), RMSE = ", round(RMSE_dp1, 2)))
-abline(v=v , lty = 1, col = 'grey70')
+abline(v=v , lty = 2, col = 2, lwd = 2)
 plot(
    x = selection_probs$threshold,
    y = selection_probs$pp_EWMSE,
@@ -163,7 +163,7 @@ plot(
    ylim = c(0,1),
    lwd = 2,
    main = paste0("d(p,2), RMSE = ", round(RMSE_dp2, 2)))
-abline(v=v , lty = 1, col = 'grey70')
+abline(v=v , lty = 2, col = 2, lwd = 2)
 dev.off()
 
 
