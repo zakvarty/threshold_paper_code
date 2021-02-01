@@ -91,7 +91,9 @@ This directory contains the code required to reproduce the two analysises in sec
 
 `flat_thresholds/` contains the code required to fit above the conservative threshold and motivate the use of the Rounded GPD. It also contains the code to select a flat threshold via grid search, and then compare the models fitted using the selected and conservative thresholds.
 
-`groningen_sigmoid/` contains the code required to select a sigmoid threshold for the Groningen catalogue via Bayesian optimisation. This is done in `main.R`. The model using the selected sigmoid threshold is fitted and compared to the those using the flat thresholds in `post_selection.R`.
+`sigmoid_thresholds/` contains the code required to select a sigmoid threshold for the Groningen catalogue via Bayesian optimisation. This is done in `main.R`. The model using the selected sigmoid threshold is fitted and compared to the those using the flat thresholds in `post_selection.R`. 
+
+`changepoint_thresholds` contains additional code for exploratory selection of a changepoint type threshold for the Groningen catalogue via Bayesian Optimisation. 
 
 
 
