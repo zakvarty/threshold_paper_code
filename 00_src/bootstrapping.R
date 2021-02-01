@@ -285,4 +285,76 @@ bootstrap_mle_gpd_rd_varu <- function(bootstrap_x,bootstrap_v, sigxi_init, u,  t
   return(out)
 }
 
+######
+###    EXPONENTIAL VERSIONS
+######
+
+bootstrap_mle_exp_rd_varu <- function(bootstrap_x,bootstrap_v, sigxi_init, u,  to_nearest, llh_val = FALSE, hessian = FALSE) {
+
+  # Numerically minimise negative log-likelihood
+  # temp <- optim(par = sigxi_init,
+  #               fn = bootstrap_llh_gpd_rd_varu,
+  #               u = u,
+  #               v = bootstrap_v,
+  #               x = bootstrap_x,
+  #               to_nearest = to_nearest,
+  #               negative = TRUE)
+  temp <- optimize(f = bootstrap_llh_exp_rd_varu,
+                   interval = c(1e-8, 1e3),
+                   maximum = FALSE,
+                   tol = 1e-4,
+                   u = u,
+                   v = bootstrap_v,
+                   x = bootstrap_x,
+                   to_nearest = to_nearest,
+                   negative = TRUE)
+
+  #format output
+  if(!llh_val & !hessian){out <-  c(temp$minimum,0)} else {out <- list(params = c(temp$minimum,0))}
+  if(llh_val) out$loglik <- -temp$objective
+  if(hessian) out$hessian <- NA
+
+  return(out)
+}
+
+bootstrap_llh_exp_rd_varu <- function(sig, u, v, x, to_nearest, negative){
+
+  # Check all scale params positive
+  sigxi <- c(sig, 0)
+  if(sigxi[1] <= 0){ llh <- -10e6 ; return((-1)^negative * llh)}
+
+  # check x all be above v (adjusted for rounding)
+  lep_fail <- any(x <= v - to_nearest/2)
+  if(lep_fail){stop('lower endpoint failure:  !all(x > v - to_nearest / 2).')}
+
+  # check all x below UEP (if it exists, adjusting for rounding)
+  latent_uep <- NULL
+  uep_fail <- FALSE
+  if(sigxi[2] < 0){
+    latent_uep <- u - sigxi[1] / sigxi[2]
+    uep_fail <- max(x) >= (latent_uep + to_nearest / 2)
+  }
+  if(!is.null(latent_uep) & uep_fail){
+    llh <- -10e6
+    return((-1)^negative * llh)
+  }
+
+  #format inputs
+  u <- rep(u, length(x))
+  xi <- rep(sigxi[2], length(x))
+  sig_u <- rep(sigxi[1], length(x))
+  sig_v <- sig_u + xi * (v - u)
+
+  # calculate llh
+  x_high <- x + to_nearest / 2
+  x_low <- pmax(x - to_nearest / 2, v)
+
+  p_high <- pgpd(q = x_high, shape = xi, scale = sig_v, mu = v)
+  p_low  <- pgpd(q = x_low , shape = xi, scale = sig_v, mu = v)
+
+  p_in <- p_high - p_low
+  llh <- sum(log(p_in))
+  #print(((-1)^negative) * llh)
+  return(((-1)^negative) * llh)
+}
 
