@@ -245,14 +245,17 @@ pdf("./Output/plots/flat_threshold_selection/groningen_flat_metric_values.pdf", 
     par(mar = c(5.1,5.1,2.1,1.1))
     plot(x = metric_values$threshold,
          y = (metric_values$dq1_value),
-         cex = 0.8,
-         pch = 16,
+         type = 'n',
          log = 'y',
          xlab = "threshold value, v",
          ylab = "d(q,1)",
          cex.axis = 2,
          cex.lab = 2)
-    abline(v =  seq(0.15,2.05,by = .1), lty = 2)
+    abline(v =  seq(0.15,2.05,by = .1), lty = 1, col = 'grey70')
+    points(x = metric_values$threshold,
+           y = (metric_values$dq1_value),
+           cex = 0.8,
+           pch = 16)
 dev.off()
 
 # Get best threshold and metric value for that threshold
