@@ -33,3 +33,25 @@ ggplot2::ggplot(cat_full, ggplot2::aes(x = index, y = mag)) +
   ggplot2::xlab('event index') +
   ggplot2::theme_minimal(base_size = 22)
 dev.off()
+
+## SAME PLOTS BUT PNG ----------------------------------------------------------
+
+
+## PLOT 1 -- Natural timescale
+ggplot2::ggplot(cat_full, ggplot2::aes(x = date, y = mag)) +
+  ggplot2:: geom_point(col = 'grey60', size = 2.5) +
+  ggplot2::geom_smooth(method = 'loess', col = 'black',) +
+  ggplot2::ylab('magnitude') +
+  ggplot2::xlab('event time') +
+  ggplot2::theme_minimal(base_size = 22)
+ggplot2::ggsave("./output/plots/groningen_catalogue_natural.jpg", width = 8, height = 5)
+
+## PLOT 2 -- Index timescale
+ggplot2::ggplot(cat_full, ggplot2::aes(x = index, y = mag)) +
+  ggplot2:: geom_point(col = 'grey60', size = 2.5) +
+  ggplot2::geom_smooth(method = 'loess', col = 'black',) +
+  ggplot2::ylab('magnitude') +
+  ggplot2::xlab('event index') +
+  ggplot2::theme_minimal(base_size = 22)
+ggplot2::ggsave("./output/plots/groningen_catalogue_index.jpg", width = 8, height = 5)
+
