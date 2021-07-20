@@ -261,6 +261,10 @@ pdf(pdf_path, width = 7, height = 5)
     text(x = as.Date("2012-06-01"), y = 3.5, labels = "A", cex = 2) # "Installation \n start"
     text(x = as.Date("2016-01-01"), y = 3.5, labels = "B", cex = 2) # Sensors \n active")
     text(x = as.Date("2019-01-01"), y = 3.5, labels = "C", cex = 2) #All \n active",)
+
+    #abline(v = as.Date("2015-01-11"), lwd = 2) # (approx) change location for turquoise (between events 746 and 747)
+    #abline(v = as.Date("2016-11-20"), lwd = 2) # (approx) change loction for reg (event 950.5)
+
     #legend("topleft",
     #       legend = paste0(unique(top_thresholds$init), " (",round(expected_exccedances[seq(1,21,by = 5)]),")"),
     #       col = seq_along(unique(top_thresholds$init)) + 1,
