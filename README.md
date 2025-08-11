@@ -5,18 +5,22 @@ R code for plots and statistics used in threshold selection paper (Varty, Tawn, 
 To run this code several R packages are required. They may be installed by running the code below.
     
 ```
-    required_pkgs <- c(
-        "dplyr",
-        "ggplot2"
-        "jsonlite",
-        "lubridate",
-        "matrixStats",
-        "purrr",
-        "readr",
-        "sp"
-        )
+required_pkgs <- c(
+  "stringr",
+  "dplyr",
+  "ggplot2"
+  "jsonlite",
+  "lubridate",
+  "matrixStats",
+  "purrr",
+  "readr",
+  "sp",
+  "devtools"
+)
         
-    install.packages(required_pkgs)
+install.packages(required_pkgs)
+    
+devtools::install_github("zakvarty/threshold")
 ```
 
 ## Structure 
