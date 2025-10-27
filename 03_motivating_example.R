@@ -12,7 +12,7 @@ SEED = 1234
 DELTA = 0.1
 N_SIMS = 1000
 
-OUTPUT_PATH <- here("00_outputs", "03_motivating_example")
+OUTPUT_PATH <- here::here("00_outputs", "03_motivating_example")
 
 # 1: Source necessary code -----------------------------------------------------
 library(dplyr)
@@ -141,8 +141,9 @@ for (i in 1:N_SIMS) {
   mles_cons[i,] <- mle_gpd_rd(
     x = cat_cons$mag,
     v = cat_cons$v_cons,
-    sigxi = c(1,0),
-    u = u,
+    scale_init = 1,
+    shape_init = 0,
+    shift = u,
     to_nearest = to_nearest,
     llh_val = FALSE,
     hessian = FALSE
@@ -151,8 +152,9 @@ for (i in 1:N_SIMS) {
   mles_step[i,] <- mle_gpd_rd(
     x = cat_step$mag,
     v = cat_step$v_step,
-    sigxi = c(1,0),
-    u = u,
+    scale_init = 1,
+    shape_init = 0,
+    shift = u,
     to_nearest = to_nearest,
     llh_val = FALSE,
     hessian = FALSE
@@ -161,13 +163,14 @@ for (i in 1:N_SIMS) {
   mles_xtra[i,] <- mle_gpd_rd(
     x = c(cat_cons$mag, mags_extra),
     v = c(cat_cons$v_cons, v_extra),
-    sigxi = c(1,0),
-    u = u,
+    scale_init = 1,
+    shape_init = 0,
+    shift = u,
     to_nearest = to_nearest,
     llh_val = FALSE,
     hessian = FALSE
   )
-  if (i %% 10 == 0) print(i)
+  if (i %% 10 == 0) print(paste(i,"/",N_SIMS))
 }
 
 # 4: Plots relating to estimated parameters   ----------------------------------
@@ -263,11 +266,16 @@ readr::write_csv(MSE_df, file = path)
 ## 5.1: Calculate point estimates and confidence intervals ----------------------
 return_periods <- 1/(0.1^(seq(0,3,length.out = 101)))
 
-return_level(scale = mles_cons$sig_u[1], shape = mles_cons$xi[1], shift = 1.05, v = 1.45, period = return_periods)
+return_level(
+   scale = mles_cons$sig_u[1],
+   shape = mles_cons$xi[1],
+   shift = u,
+   v = v_cons[1],
+   period = return_periods)
 
-rl_cons <- mle_return_levels(mles_cons)
-rl_step <- mle_return_levels(mles_step)
-rl_xtra <- mle_return_levels(mles_xtra)
+rl_cons <- mle_return_levels(mles_cons, shift = u, v = v_cons[1])
+rl_step <- mle_return_levels(mles_step, shift = u, v = v_cons[1])
+rl_xtra <- mle_return_levels(mles_xtra, shift = u, v = v_cons[1])
 
 rl_CI_cons <- return_level_confidence_interval(rl_cons)
 rl_CI_step <- return_level_confidence_interval(rl_step)
