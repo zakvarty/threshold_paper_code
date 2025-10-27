@@ -244,7 +244,7 @@ MSE_df <- compare_MSEs(
 dev.off()
 
 
-## 4.3: Calculate MSE with each method  and save as image ----------------------
+## 4.3: Calculate MSE with each method  and save as CSV ----------------------
 
 # Get reduction factors as compared to conservative
 
@@ -254,7 +254,7 @@ MSE_df$MSE <- apply(MSE_df, MARGIN = 1, FUN = sum)
 
 MSE_df <- MSE_df %>%
   mutate(MSE_reduction_factor = MSE / max(MSE)) %>%
-  add_rownames(var = "threshold_type")
+  tibble::rownames_to_column(var = "threshold_type")
 
 file_name <- "mse_decomposition_motivating_example.csv"
 path <- here(OUTPUT_PATH, file_name)
@@ -264,6 +264,7 @@ readr::write_csv(MSE_df, file = path)
 # 5: Return level plots --------------------------------------------------------
 
 ## 5.1: Calculate point estimates and confidence intervals ----------------------
+
 return_periods <- 1/(0.1^(seq(0,3,length.out = 101)))
 
 return_level(
