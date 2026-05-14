@@ -17,6 +17,7 @@ library(lubridate)
 
 SEED <- 1234
 OUTPUT_PATH <- here("00_outputs", "02_motivation_and_model")
+PNG_RES <- 600
 
 set.seed(SEED)
 
@@ -102,11 +103,29 @@ for (t in seq_along(thresholds)) {
   dev.off()
   cat(file_name, "complete \n")
 
+  file_name <- stringr::str_c(base_file_name, "_qq.png")
+  path <- here(OUTPUT_PATH, file_name)
+
+  png(file = path, width = 4, height = 4, units = "in", res = PNG_RES)
+  par(mar = c(4.1, 4.1, 1.1, 1.1))
+  qqs[[t]] <- qq_gpd(x = cat$mag, u = thresholds[t], seed = SEED)
+  dev.off()
+  cat(file_name, "complete \n")
+
   # unjittered PP plot -------
   file_name <- stringr::str_c(base_file_name, "_pp.pdf")
   path <- here(OUTPUT_PATH, file_name)
 
   pdf(file = path, width = 4, height = 4)
+  par(mar = c(4.1, 4.1, 1.1, 1.1))
+  pp_gpd(x = cat$mag, u = thresholds[t], seed = SEED)
+  dev.off()
+  cat(file_name, "complete \n")
+
+  file_name <- stringr::str_c(base_file_name, "_pp.png")
+  path <- here(OUTPUT_PATH, file_name)
+
+  png(file = path, width = 4, height = 4, units = "in", res = PNG_RES)
   par(mar = c(4.1, 4.1, 1.1, 1.1))
   pp_gpd(x = cat$mag, u = thresholds[t], seed = SEED)
   dev.off()
@@ -122,11 +141,29 @@ for (t in seq_along(thresholds)) {
   dev.off()
   cat(file_name, "complete \n")
 
+  file_name <- stringr::str_c(base_file_name, "_qq_jittered.png")
+  path <- here(OUTPUT_PATH, file_name)
+
+  png(file = path, width = 4, height = 4, units = "in", res = PNG_RES)
+  par(mar = c(4.1, 4.1, 1.1, 1.1))
+  qqs_jittered[[t]] <- qq_gpd(x = cat$mag, u = thresholds[t], jitter = 0.1, seed = SEED)
+  dev.off()
+  cat(file_name, "complete \n")
+
   # jittered PP plot ------
   file_name <- stringr::str_c(base_file_name, "_pp_jittered.pdf")
   path <- here(OUTPUT_PATH, file_name)
 
   pdf(file = path, width = 4, height = 4)
+  par(mar = c(4.1, 4.1, 1.1, 1.1))
+  pp_gpd(x = cat$mag, u = thresholds[t], jitter = 0.1, seed = SEED)
+  dev.off()
+  cat(file_name, "complete \n")
+
+  file_name <- stringr::str_c(base_file_name, "_pp_jittered.png")
+  path <- here(OUTPUT_PATH, file_name)
+
+  png(file = path, width = 4, height = 4, units = "in", res = PNG_RES)
   par(mar = c(4.1, 4.1, 1.1, 1.1))
   pp_gpd(x = cat$mag, u = thresholds[t], jitter = 0.1, seed = SEED)
   dev.off()
