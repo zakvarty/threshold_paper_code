@@ -35,7 +35,7 @@ v_step <- rep(c(1.65, 1.05), each = cat_size / 2)
 ## 2.2: Create full catalogue --------------------------------------------------
 mags_full <- rgpd_rd(
   n = cat_size,
-  shift_latent = u,
+  shift = u,
   scale = sig_u,
   shape =  xi,
   to_nearest = to_nearest
@@ -114,7 +114,7 @@ for (i in 1:N_SIMS) {
   # Generate magnitudes for all earthquakes that happened
   mags_full <- rgpd_rd(
     n = cat_size,
-    shift_latent = u,
+    shift = u,
     scale = sig_u,
     shape =  xi,
     to_nearest = to_nearest)
@@ -133,7 +133,7 @@ for (i in 1:N_SIMS) {
     n = n_extra,
     scale = sig_v_cons[1],
     shape = xi,
-    shift_latent = v_cons[1],
+    shift = v_cons[1],
     to_nearest = to_nearest)
   v_extra <- rep(v_cons[1], n_extra)
 
