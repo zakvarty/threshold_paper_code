@@ -308,9 +308,9 @@ CI_lines(rl_CI_xtra, col = "grey70", lwd = 2, lty = 3)
 CI_lines(rl_CI_step, col = "grey50", lwd = 2, lty = 4)
 lines(x = return_periods, y = rl_true, col = "black", lwd = 2)
 legend('topleft',
-       c("True","Conservative", "Extended", "Stepped"),
-       col = c("black","grey40", "grey60", "grey80"),
-       lty = c(1,2,3,4),
+       c("True","Conservative",  "Stepped","Extended"),
+       col = c("black","grey30", "grey50", "grey70"),
+       lty = c(1,2,4,3),
        lwd = 2,
        cex = 1.2,
        bty = 'n')
