@@ -21,4 +21,3 @@ if (DOWNLOAD_NEW_JSON) {
   readr::write_csv(gf_cat, file = csv_path)
 }
 
-# Can I commit and push?
