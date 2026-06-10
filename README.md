@@ -8,19 +8,19 @@ To run this code several R packages are required. They may be installed by runni
 required_pkgs <- c(
   "stringr",
   "dplyr",
-  "ggplot2"
+  "ggplot2",
   "jsonlite",
   "lubridate",
   "matrixStats",
   "purrr",
   "readr",
   "sp",
-  "devtools"
+  "pak"
 )
         
 install.packages(required_pkgs)
-    
-devtools::install_github("zakvarty/threshold")
+ 
+pak::pkg_install("zakvarty/threshold")
 ```
 
 ## Structure 
