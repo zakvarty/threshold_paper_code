@@ -100,7 +100,5 @@ This directory contains the code required to reproduce the two analysises in sec
 `changepoint_thresholds` contains additional code for exploratory selection of a changepoint type threshold for the Groningen catalogue via Bayesian Optimisation. 
 
 
-
-
 ## License 
 [GNU GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
