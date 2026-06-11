@@ -1,0 +1,67 @@
+---
+title: "zz_explainer"
+output: html_document
+---
+```{r}
+library("threshold")
+```
+
+## Parial Observation
+
+Below an appropriate magnitude threshold not all events are detected. The probability of detection depends on the magnitude of the earthquake relative to the threshold value. We consider two potential forms for the detection probability function:
+
+\begin{equation}
+    \alpha_H(\tau,y)=I[y\ge v(\tau)] \text{ and }
+    \alpha_P(\tau,y;\lambda)= 
+\exp(-\lambda [v(\tau) - y]_+). 
+\end{equation}
+
+```{r}
+#| fold: true
+m <- seq(-1, 3, by = 0.01)
+v <- rep(0.72, length(m))
+hard_alpha <- threshold::alpha(m, v, lambda = Inf)
+
+plot(m, hard_alpha, 
+     xlab = "Event magnitude", 
+     ylab = "Detection Probability",
+     type = "l", 
+     col = "darkorange", 
+     lwd = 2)
+```
+
+
+The hard detection probability function $\alpha_H$ is 0 for any magnitude less than its corresponding threshold value and 1 for any magnitude exceeding it. This is unrealistic in most earthquake catalogs but allows us to assess the performance of our methods in an optimistic edge case, which corresponds to a catalog that is preprocessed to remove all earthquakes below some conservative estimate of $m_c$. 
+
+Phased detection softens this assumption, assuming that the detection probability is 1 above a suitable magnitude threshold and below this threshold decreases smoothly with smaller events becoming ever more difficult to detect. 
+
+```{r}
+#| fold: true
+#| caption: "Phased detection probabilities for $\lambda$ between 0 and 10."
+
+phased_alpha <- threshold::alpha(m, v, lambda = 0)
+plot(m, phased_alpha, 
+     xlab = "Event magnitude", 
+     ylab = "Detection Probability",
+     type = "l", 
+     col = "grey70",
+     lwd = 2,
+     ylim = c(0, 1.1))
+
+lambdas <- seq(0.5, 10, by = 0.5)
+for (i in seq_along(lambdas)) {
+  phased_alpha <- threshold::alpha(m, v, lambda = lambdas[i])
+  lines(m, phased_alpha, col = "grey70", lwd = 2)
+}
+
+phased_alpha <- threshold::alpha(m, v, lambda = lambdas[14])
+lines(m, phased_alpha, col = "black", lwd = 2)
+
+legend("bottomright", legend ="7", col = "black", lwd = 2, bty = "n")
+```
+
+The rate at which this probability decays is controlled by a single parameter $\lambda>0$, where larger values lead to faster decay. As $\lambda$ becomes very large, the difference between hard and phased censoring becomes negligible.
+
+
+
+
